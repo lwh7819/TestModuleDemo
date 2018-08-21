@@ -1,0 +1,14 @@
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:windowAnimationStyle">@style/ActivityAnimation</item>
+    </style>
+
+    <style name="ActivityAnimation" parent="android:Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/push_left_enter</item>
+        <item name="android:activityOpenExitAnimation">@anim/push_left_exit</item>
+        <item name="android:activityCloseEnterAnimation">@anim/push_right_enter</item>
+        <item name="android:activityCloseExitAnimation">@anim/push_right_exit</item>
+    </style>
+
+</resources>

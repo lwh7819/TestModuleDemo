@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">CommonLib</string>
+    <!-- 基本字段 -->
+    <string name="close">关闭</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+    <string name="reset">重置</string>
+    <string name="setting">设置</string>
+    <string name="prompt">提示</string>
+    <string name="loading">正在加载</string>
+
+    <!-- 错误处理 -->
+    <string name="error_msg_connection">连接失败, 请检查您的网络</string>
+    <string name="error_msg_server">服务器错误</string>
+    <string name="error_msg_unknow">内部错误</string>
+    <string name="error_msg_timeout">请求超时，请重试</string>
+    <string name="error_msg_unknown">未知错误</string>
+</resources>
