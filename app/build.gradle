@@ -1,5 +1,9 @@
 apply plugin: 'com.android.application'
 
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
     compileSdkVersion 26
     defaultConfig {
@@ -10,10 +14,44 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    signingConfigs {
+        release {
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            //是否优化zip
+            zipAlignEnabled true
+            // 移除无用的resource文件
+//            shrinkResources true
+            signingConfig signingConfigs.release
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            def formatedDate = new Date().format("yyyy-MM-dd_HH-mm")
+            if (variant.buildType.name.equals('release')) {
+                def fileName = "dsf_app_ver_${defaultConfig.versionName}(build${defaultConfig.versionCode})(${formatedDate}).apk"
+                outputFileName = fileName
+            }
+
+            if (variant.buildType.name.equals('debug')) {
+                def debugApkName = "dsf_app_ver_debug(${formatedDate}).apk"
+                outputFileName = debugApkName
+            }
+
         }
     }
 }
